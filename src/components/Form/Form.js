@@ -2,18 +2,6 @@ import React, { Component } from "react";
 import Day from "../Day/Day";
 import Hourly from "../Hourly/Hourly";
 
-Array.prototype.groupBy = function(prop, endIndex = undefined) {
-  // reduce function
-  return this.reduce(function(groups, item) {
-    const value = item[prop].substring(0, endIndex);
-
-    groups[value] = groups[value] || [];
-    groups[value].push(item);
-
-    return groups;
-  }, []);
-};
-
 class Form extends Component {
   constructor() {
     super();
@@ -44,7 +32,7 @@ class Form extends Component {
 
     const cityname = e.nativeEvent.target.elements[0].value;
 
-    /*fetch(
+    fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=${cityname}&APPID=1baacd93abb3b6db530672512cd75f6c&units=metric&cnt=8`
     )
       .then(this.handleErrors)
@@ -61,7 +49,7 @@ class Form extends Component {
       })
       .catch(function(error) {
         console.log(error);
-      });*/
+      });
 
     fetch(
       `https://api.openweathermap.org/data/2.5/forecast?q=${cityname}&APPID=1baacd93abb3b6db530672512cd75f6c&units=metric`
