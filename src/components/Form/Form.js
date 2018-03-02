@@ -7,8 +7,13 @@ class Form extends Component {
     super();
     this.state = {
       weather: [],
-      forecast: []
+      forecast: [],
+      location: [],
+      longitude: 0,
+      latitude: 0
     };
+
+    this.success = this.success.bind(this);
   }
 
   handleErrors(response) {
@@ -26,6 +31,57 @@ class Form extends Component {
       return groups;
     });
   }*/
+
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(this.success, this.error);
+  }
+
+  success(pos) {
+    this.setState({
+      longitude: pos.coords.longitude,
+      latitude: pos.coords.latitude
+    });
+    {
+      console.log("Your current position is:");
+    }
+    {
+      console.log(`Latitude : ${this.state.latitude}`);
+    }
+    {
+      console.log(`Longitude: ${this.state.longitude}`);
+    }
+
+    this.getLocation();
+  }
+
+  error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  getLocation() {
+    fetch(
+      `http://api.openweathermap.org/data/2.5/weather?lat=${
+        this.state.latitude
+      }&lon=${
+        this.state.longitude
+      }&APPID=1baacd93abb3b6db530672512cd75f6c&units=metric`
+    )
+      .then(this.handleErrors)
+      .then(res => res.json())
+      .then(res => {
+        this.setState(
+          {
+            location: res.list
+          },
+          function() {
+            console.log(res);
+          }
+        );
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
 
   onFormSubmit(e) {
     e.preventDefault();
@@ -83,6 +139,12 @@ class Form extends Component {
           />
           <button type="submit">Get weather</button>
         </form>
+        <div>
+          <p id="demo"> Location</p>
+          <button onClick={this.componentDidMount.bind(this)}>
+            Get Location
+          </button>
+        </div>
 
         {this.state.hourly && this.state.hourly.length > 0 ? (
           <div className="App-hourly">
