@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Hourly.css"
 
 class Hourly extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class Hourly extends Component {
     }
     */
     return (
-      <div>
+      <div className="row-parent">
         <div className="row">
           <div className="small-10 small-centered column">
             <div className="forecast-container">
@@ -23,17 +24,17 @@ class Hourly extends Component {
                     alt="weather-icon"
                     src={`http://openweathermap.org/img/w/${
                       this.props.interval.weather[0].icon
-                    }.png`}
+                      }.png`}
                   />
                 </div>
                 <div className="small-10 medium-9 column">
                   {this.props.interval.weather[0].description}
                   <br />
-                  {this.props.interval.main.temp} &deg; Celcius
+                  {this.props.interval.main.temp} &deg; Celcius / {Math.floor(this.props.interval.main.temp * 9 / 5 + 32)} &deg; F
                   <br />
-                  Highest {this.props.interval.main.temp_max} &deg; C
+                  Highest {this.props.interval.main.temp_max} &deg; C / {Math.floor(this.props.interval.main.temp_max * 9 / 5 + 32)} &deg; F
                   <br />
-                  Lowest {this.props.interval.main.temp_min} &deg; C
+                  Lowest {this.props.interval.main.temp_min} &deg; C / {Math.floor(this.props.interval.main.temp_min * 9 / 5 + 32)} &deg; F
                   <br />
                   Wind speed {this.props.interval.wind.speed} m/s
                   <br />
