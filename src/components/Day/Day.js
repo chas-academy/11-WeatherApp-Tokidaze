@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './Day.css'
 
 class Day extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ class Day extends Component {
     }
     */
     return (
-      <div>
+      <div className="parent-row">
         <div className="row">
           <div className="small-10 small-centered column">
             <div className="forecast-container">
@@ -29,15 +30,15 @@ class Day extends Component {
                 <div className="small-10 medium-9 column">
                   {this.props.interval.weather[0].description}
                   <br />
-                  {this.props.interval.main.temp} &deg; Celcius / {Math.floor(this.props.interval.main.temp * 9 / 5 + 32)} &deg; F
+                  Temp: {this.props.interval.main.temp} &deg; Celcius / {Math.floor(this.props.interval.main.temp * 9 / 5 + 32)} &deg; F
                   <br />
-                  Highest {this.props.interval.main.temp_max} &deg; C / {Math.floor(this.props.interval.main.temp_max * 9 / 5 + 32)} &deg; F
+                  Highest: {this.props.interval.main.temp_max} &deg; C / {Math.floor(this.props.interval.main.temp_max * 9 / 5 + 32)} &deg; F
                   <br />
-                  Lowest {this.props.interval.main.temp_min} &deg; C / {Math.floor(this.props.interval.main.temp_min * 9 / 5 + 32)} &deg; F
+                  Lowest: {this.props.interval.main.temp_min} &deg; C / {Math.floor(this.props.interval.main.temp_min * 9 / 5 + 32)} &deg; F
                   <br />
-                  Wind speed {this.props.interval.wind.speed} m/s
+                  Wind speed: {this.props.interval.wind.speed} m/s
                   <br />
-                  Humidity {this.props.interval.main.humidity} %
+                  Humidity: {this.props.interval.main.humidity} %
                 </div>
               </div>
             </div>

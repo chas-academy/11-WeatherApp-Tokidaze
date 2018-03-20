@@ -6,6 +6,12 @@
 .App-hourly {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 2em;
+}
+
+.App-forecast{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .App-location-component {
@@ -21,3 +27,18 @@
 .form-button {
     font-size: 20px;
 }
+
+.hourly-header {
+    font-size: 20px;
+    margin: 0;
+    position: absolute;
+    margin-left: 48%;
+}
+
+.forecast-header{
+    font-size: 20px;
+    margin: 0;
+    position: absolute;
+    margin-left: 44%;
+}
+

@@ -22,6 +22,7 @@ class Form extends Component {
     };
 
     this.success = this.success.bind(this);
+    this.error = this.error.bind(this);
   }
 
   handleErrors(response) {
@@ -53,8 +54,13 @@ class Form extends Component {
     this.getLocation();
   }
 
-  error(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
+  error() {
+    alert("Could not find your location, showing Stockholm weather instead :)")
+    this.setState({
+      latitude: 59.32932349999999,
+      longitude: 18.068580800000063
+    });
+    this.getLocation();
   }
 
   getLocation() {
@@ -153,10 +159,11 @@ class Form extends Component {
 
 
         <div className='App-location'>
+          <p className="App-location-component"><b>Weather at your location:</b></p>
           <p className="App-location-component">Location: {this.state.name}, {this.state.country}</p>
-          <p className="App-location-component">Temprature: {this.state.temp} &deg;C / {Math.floor(this.state.temp * 9 / 5 + 32)} &deg; F</p>
+          <p className="App-location-component">Temp: {this.state.temp} &deg;C / {Math.floor(this.state.temp * 9 / 5 + 32)} &deg; F</p>
           <p className="App-location-component">Humidity: {this.state.humidity} %</p>
-          <p className="App-location-component">Windspeed: {this.state.wind.speed} m/s</p>
+          <p className="App-location-component">Wind speed: {this.state.wind.speed} m/s</p>
           <p className="App-location-component">Sunrise: {this.calculateTime(this.state.sunrise)}</p>
           <p className="App-location-component">Sunset: {this.calculateTime(this.state.sunset)}</p>
         </div>
@@ -194,7 +201,7 @@ class Form extends Component {
 
         {this.state.hourly && this.state.hourly.length > 0 ? (
           <div className="App-hourly">
-            {" "}
+            <h1 className="hourly-header">24h Weather</h1>
             {this.state.hourly.map((interval, index) => {
               return <Hourly key={index} interval={interval} />;
             })}
@@ -205,7 +212,7 @@ class Form extends Component {
 
         {this.state.forecast && this.state.forecast.length > 0 ? (
           <div className="App-forecast">
-            {" "}
+            <h1 className="forecast-header">5 Day weather prognosis</h1>
             {this.state.forecast.map((interval, index) => {
               return <Day key={index} interval={interval} />;
             })}
